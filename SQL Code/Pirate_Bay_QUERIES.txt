@@ -1,0 +1,71 @@
+1.Βρες πελάτη βάση ονόματος.
+
+SELECT *
+		FROM Customers 
+		WHERE cname = $1;
+
+
+2.Βρες ταινίες βάση ονόματος.
+
+SELECT *
+		FROM Movies 
+		WHERE title = $1;
+
+
+3.Βρες παιχνίδια βάση είδους.
+
+SELECT *
+   FROM Games
+   WHERE genre = $1;
+
+
+4.Βρες πόσες είναι όλες οι ενοικιάσεις.
+
+SELECT COUNT(cid)
+   FROM rentals
+
+
+5.Βρες τις συνολικές ενοικιάσεις του κάθε καταστήματος.
+SELECT COUNT(rentals.vid),address
+	FROM video_clubs LEFT JOIN rentals ON video_clubs.vid=rentals.vid
+	GROUP BY video_clubs.vid
+	ORDER BY count DESC;
+
+
+6.Βρες ταινίες με βαθμολογία μεγαλύτερη του 5.
+
+SELECT *
+		FROM Movies 
+		WHERE rating > 5;
+
+
+7.Πόσες ενοικίασεις έγιναν βάση έτους.
+
+SELECT COUNT(*)
+	FROM rentals
+	WHERE DATE_PART('year',rdate) = $1;
+
+
+8.Βρες παιχνίδια βάση κονσόλας.
+
+SELECT *
+   FROM Games
+   WHERE console = $1;
+
+
+9.Βρες ποιά Video Club δεν έχουν καμία ενοικίαση.
+
+SELECT DISTINCT address
+	FROM video_clubs
+EXCEPT
+SELECT DISTINCT address
+	FROM video_clubs NATURAL JOIN rentals
+
+
+10.Βρες ποίοι πελάτες έχουν περισσότερες από μία ενοικιάσεις.
+SELECT cname
+	FROM customers INNER JOIN rentals ON customers.cid=rentals.cid
+	GROUP BY customers.cid
+	HAVING COUNT(rentals.cid)>1	
+
+

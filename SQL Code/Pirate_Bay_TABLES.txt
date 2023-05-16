@@ -1,0 +1,113 @@
+CREATE TABLE Products
+    (pid INTEGER NOT NULL constraint p_key PRIMARY KEY,
+    ptype VARCHAR(10) NOT NULL constraint p_type CHECK (ptype IN ('movie','game')));
+
+CREATE TABLE Movies
+    (mid INTEGER NOT NULL constraint m_key references Products(pid) ON DELETE CASCADE,
+     title VARCHAR(80) NOT NULL,
+     director VARCHAR(40),
+     genre VARCHAR(20),
+     myear INTEGER,
+     rating FLOAT constraint m_rating CEHCK (rating BETWEEN 1 AND 10));  
+
+CREATE TABLE Games
+    (gid INTEGER NOT NULL constraint g_key references Products(pid) ON DELETE CASCADE,
+     title VARCHAR(80) NOT NULL,
+     console VARCHAR(20) constraint g_console CHECK (console IN ('PC','XBOX','PS4','PS5')),
+     genre VARCHAR(20),
+     gyear INTEGER,
+     rating FLOAT constraint g_rating CHECK (rating BETWEEN 1 AND 10));
+
+CREATE TABLE Video_Clubs
+    (vid INTEGER NOT NULL constraint v_key PRIMARY KEY,
+     address VARCHAR(80) NOT NULL,
+     phone VARCHAR(20));
+
+CREATE TABLE Customers
+    (cid INTEGER not null constraint c_key PRIMARY KEY,
+     cname VARCHAR(80) NOT NULL,
+     address VARCHAR(80) NOT NULL,
+     phone VARCHAR(20));
+
+CREATE TABLE Rentals
+    (rid INTEGER NOT NULL constraint r_key PRIMARY KEY,
+    cid INTEGER NOT NULL constraint rc_key references Customers(cid),
+    vid INTEGER NOT NULL constraint rv_key references Video_Clubs(vid) ON DELETE CASCADE,
+    pid INTEGER NOT NULL constraint rp_key references Products(pid),
+    rdate DATE NOT NULL);
+
+INSERT INTO Customers(cid,cname,address,phone) VALUES (2,'Γιάννης','Μακεδονιας 140',6985456352);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (11,'Μαρία','Δελφών 165',6985777485);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (12,'Θανάσης','Βούλγαρη 16',6944586998);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (13,'Γιάννης','Αδριανουπόλεως 10',6944152586);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (1,'Χριστίνα','Μαρτίου 87',6942655887);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (15,'Θόδωρος','Δελφών 33',null);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (16,'Λεωνίδας','Γαμβέττα 86',6988963332);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (17,'Ελευθερία','Τζαβέλλα 36',698588648);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (19,'Πολύκαρπος','Μπότσαρη 55',null);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (27,'Μαριάνθη','Τσιμισκή 3',6948562365);
+INSERT INTO Customers(cid,cname,address,phone) VALUES (37,'Κώστας','Βούλγαρη 16',6944258465);
+
+INSERT INTO Video_Clubs(vid,address,phone) VALUES(33,'Τσιμισκή 24',2310659845);
+INSERT INTO Video_Clubs(vid,address,phone) VALUES(5,'Παπαναστασίου 78',2310235654);
+INSERT INTO Video_Clubs(vid,address,phone) VALUES(1,'Β.Όλγας 12',2310298645);
+INSERT INTO Video_Clubs(vid,address,phone) VALUES(7,'Αριστοτέλους 187',2310632224);
+INSERT INTO Video_Clubs(vid,address,phone) VALUES(2,'Μαρτίου 34',2310478554);
+
+INSERT INTO Products(pid,ptype) VALUES(88,'game');
+INSERT INTO Products(pid,ptype) VALUES(17,'game');
+INSERT INTO Products(pid,ptype) VALUES(13,'game');
+INSERT INTO Products(pid,ptype) VALUES(1,'game');
+INSERT INTO Products(pid,ptype) VALUES(72,'game');
+INSERT INTO Products(pid,ptype) VALUES(19,'game');
+INSERT INTO Products(pid,ptype) VALUES(77,'game');
+INSERT INTO Products(pid,ptype) VALUES(94,'movie');
+INSERT INTO Products(pid,ptype) VALUES(41,'movie');
+INSERT INTO Products(pid,ptype) VALUES(122,'movie');
+INSERT INTO Products(pid,ptype) VALUES(10,'movie');
+INSERT INTO Products(pid,ptype) VALUES(4,'movie');
+INSERT INTO Products(pid,ptype) VALUES(39,'movie');
+INSERT INTO Products(pid,ptype) VALUES(3,'movie');
+INSERT INTO Products(pid,ptype) VALUES(205,'movie');
+
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(88,'Dark Souls','PC','RPG',2010,6.5);
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(17,'Diablo','PC','RPG',2002,8.9);
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(13,'Lord of the Rings','PS4','RPG',2010,4.5);
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(1,'Harry Potter','PS4','Action',2008,7);
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(72,'Skyrim','PC','RPG',2011,6.1);
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(19,'Mortal Kombat','PS5','Fight',2013,8.6);
+INSERT INTO Games(gid,title,console,genre,gyear,rating) VALUES(77,'Need for Speed','XBOX','Racing',2017,10);
+
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(94,'The Dark Knight','Christopher Nolan','Action',2010,6.5);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(41,'The Godfather','Francis Ford Coppola','Drama',1972,4.9);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(122,'Lord of the Rings','Peter Jackson','Fantasy',2010,6.5);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(10,'Harry Potter','Chris Columbus','Fantasy',2008,9);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(4,'The Hangover','Todd Phillips','Comedy',2011,5.7);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(39,'Need for Speed','Scott Waugh','Action',2013,9.6);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(3,'Inception','Christopher Nolan','Sci-fi',2017,4);
+INSERT INTO Movies(mid,title,director,genre,myear,rating) VALUES(205,'Interstellar','Christopher Nolan','Sci-fi',2017,8.2);
+
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(1,11,2,72,'03-18-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(2,1,33,10,'03-22-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(3,12,5,10,'12-13-2019');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(4,12,5,10,'11-02-2021');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(5,2,33,72,'03-03-2020');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(6,12,5,94,'12-11-2021');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(7,17,2,41,'11-01-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(8,17,2,4,'01-20-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(9,16,5,1,'01-13-2020');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(10,16,5,1,'03-18-2020');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(11,37,2,122,'05-05-2020');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(12,1,7,88,'05-05-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(13,1,7,4,'06-05-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(14,1,2,72,'07-05-2020');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(15,1,5,13,'08-05-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(16,1,5,19,'09-05-2019');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(17,1,5,13,'10-05-2021');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(18,11,33,3,'10-08-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(19,12,7,77,'12-10-2021');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(20,15,7,77,'11-06-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(21,13,2,41,'04-27-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(22,19,7,122,'12-11-2021');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(23,27,7,39,'06-15-2022');
+INSERT INTO Rentals(rid,cid,vid,pid,rdate) VALUES(24,37,2,41,'11-04-2022');

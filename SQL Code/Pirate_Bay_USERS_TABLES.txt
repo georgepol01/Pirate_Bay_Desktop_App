@@ -1,0 +1,7 @@
+CREATE TABLE Users
+    (appUsers VARCHAR(80) NOT NULL PRIMARY KEY,
+     usersPasswd VARCHAR(80) NOT NULL);  
+
+INSERT INTO Users(appUsers,usersPasswd) VALUES ('Nik24','pass123');
+INSERT INTO Users(appUsers,usersPasswd) VALUES ('Geor01','hello23');
+INSERT INTO Users(appUsers,usersPasswd) VALUES ('Dbms2','goodnight200');

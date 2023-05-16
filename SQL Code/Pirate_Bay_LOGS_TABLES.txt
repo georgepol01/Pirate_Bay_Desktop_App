@@ -1,0 +1,51 @@
+CREATE TABLE Movies_audit
+    (operation VARCHAR(10) NOT NULL,
+     stamp timestamp NOT NULL PRIMARY KEY,
+     userid VARCHAR(20) NOT NULL,
+     mid INTEGER NOT NULL,
+     title VARCHAR(80),
+     director VARCHAR(40),
+     genre VARCHAR(20),
+     myear INTEGER,
+     rating FLOAT);
+
+CREATE TABLE Games_audit
+    (operation VARCHAR(10) NOT NULL,
+     stamp timestamp NOT NULL PRIMARY KEY,
+     userid VARCHAR(20) NOT NULL,
+     gid INTEGER NOT NULL,
+     title VARCHAR(80),
+     console VARCHAR(20),
+     genre VARCHAR(20),
+     myear INTEGER,
+     rating FLOAT);
+
+CREATE TABLE Video_clubs_audit
+    (operation VARCHAR(10) NOT NULL,
+     stamp timestamp NOT NULL PRIMARY KEY,
+     userid VARCHAR(20) NOT NULL,
+     vid INTEGER NOT NULL,
+     address VARCHAR(80),
+     phone VARCHAR(20));
+
+CREATE TABLE Customers_audit
+    (operation VARCHAR(10) NOT NULL,
+     stamp timestamp NOT NULL PRIMARY KEY,
+     userid VARCHAR(20) NOT NULL,
+     cid INTEGER NOT NULL,
+     cname VARCHAR(80),
+     address VARCHAR(80),
+     phone VARCHAR(20));
+
+CREATE TABLE Rentals_audit
+    (operation VARCHAR(10) NOT NULL,
+     stamp timestamp NOT NULL PRIMARY KEY,
+     userid VARCHAR(20) NOT NULL,
+     rid INTEGER NOT NULL,
+     cid INTEGER NOT NULL,
+     vid INTEGER NOT NULL,
+     pid INTEGER NOT NULL,
+     rdate DATE NOT NULL);
+
+
+       

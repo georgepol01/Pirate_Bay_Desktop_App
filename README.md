@@ -1,7 +1,7 @@
 # Pirate_Bay_Desktop_App
 A Desktop App that manages the rentals and database of a Video Club.
 
-Technologies Used: Java, Java Swing, Apache NetBeans, pgAdmin, postgreSQL, PL/SQL, triggers, stored procedures, prepared statements.
+Technologies Used: Java, Java Swing, Maven, Apache NetBeans, pgAdmin, postgreSQL, PL/SQL, triggers, stored procedures, prepared statements.
 
 
 ![Screenshot_1](https://github.com/georgepol01/Pirate_Bay_Desktop_App/assets/115163100/8b1674af-db3b-4e60-b203-66a4b1f41b4e)
